@@ -6,7 +6,7 @@
   "scripts": {
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
-    "start:dev": "ts-node src/index.ts",
+    "start:dev": "nodemon --ext ts --exec ts-node src/app.ts",
     "prepare": "prisma:migrate && prisma:generate"
   },
   "devDependencies": {

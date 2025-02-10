@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "allowUnreachableCode": false,
+    "baseUrl": "./",
+    "paths": {
+      "@*": ["./src/*"]
+    },
+    "types": ["node", "express", "./src/index.d.ts"]
+  },
+  "include": [
+    "src/**/*",
+    "prisma/**/*",
+    "src/index.d.ts",
+    "scripts/**/*",
+    "db/**/*"
+  ],
+}

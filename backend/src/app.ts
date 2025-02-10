@@ -1,5 +1,5 @@
 import express from "express";
-import { AppContext, createAppContext } from "./lib/ctx";
+import { AppContext, contextMiddleware, createAppContext } from "./lib/ctx";
 import { config } from "./lib/config";
 
 async function main() {
@@ -8,6 +8,8 @@ async function main() {
   try {
     ctx = createAppContext();
     const app = express();
+
+    app.use(contextMiddleware);
 
     app.listen(config.HTTP_PORT, () => {
       console.log(`🚀 Server ready at http://localhost:${config.HTTP_PORT}`);

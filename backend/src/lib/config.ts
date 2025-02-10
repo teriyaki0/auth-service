@@ -15,15 +15,17 @@ const configSchema = z.object({
     .int()
     .positive("REDIS_PORT должен быть положительным числом"),
 
-  JWT_SECRET: z.string().min(10, "JWT_SECRET слишком короткий"),
-  JWT_EXPIRES_IN: z
-    .string()
-    .regex(/^\d+[smhd]$/, "Формат времени: 10s, 5m, 2h, 7d"),
+  JWT_SECRET: z.string().min(1),
+  JWT_EXPIRES_IN: z.union([
+    z.string().regex(/^\d+[smhd]$/, "Формат времени: 10s, 5m, 2h, 7d"),
+    z.coerce.number().int().positive("Должно быть положительным числом"),
+  ]),
 
   REFRESH_SECRET: z.string().min(10, "REFRESH_SECRET слишком короткий"),
-  REFRESH_EXPIRES_IN: z
-    .string()
-    .regex(/^\d+[smhd]$/, "Формат времени: 10s, 5m, 2h, 7d"),
+  REFRESH_EXPIRES_IN:z.union([
+    z.string().regex(/^\d+[smhd]$/, "Формат времени: 10s, 5m, 2h, 7d"),
+    z.coerce.number().int().positive("Должно быть положительным числом"),
+  ]),
 });
 
 export const config = configSchema.parse(process.env);
