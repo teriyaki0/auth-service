@@ -1,12 +1,12 @@
 import { RequestHandler } from "express";
-import { validateSignUp } from "./scheme";
+import { signUpSchema } from "./scheme";
 import { HashUtil } from "../../utils/hash.util";
 import { JwtUtil } from "../../utils/jwt.util";
 import { config } from "../../lib/config";
 
 export const signUp: RequestHandler = async (req, res, next): Promise<void> => {
   try {
-    const { email, password } = validateSignUp(req.body);
+    const { email, password } = signUpSchema.parse(req.body);
 
     const existingUser = await req.ctx.prisma.user.findUnique({
       where: { email },
@@ -25,8 +25,7 @@ export const signUp: RequestHandler = async (req, res, next): Promise<void> => {
     });
 
     const { accessToken, refreshToken } = JwtUtil.generateTokens({
-      id: user.id,
-      email: user.email,
+      user,
     });
 
     await req.ctx.redis.set(refreshToken, user.id, {
