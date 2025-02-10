@@ -18,9 +18,6 @@
     "strictBindCallApply": true,
     "allowUnreachableCode": false,
     "baseUrl": "./",
-    "paths": {
-      "@*": ["./src/*"]
-    },
     "types": ["node", "express", "./src/index.d.ts"]
   },
   "include": [

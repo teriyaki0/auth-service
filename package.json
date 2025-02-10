@@ -2,13 +2,14 @@
   "name": "auth-service",
   "version": "1.0.0",
   "main": "index.js",
+  "private": "true",
   "workspaces": [
     "backend",
     "webapp"
   ],
   "scripts": {
-    "backend": "yarn workspace @ideation/backend",
-    "webapp": "yarn workspace @ideation/webapp"
+    "backend": "yarn workspace @auth-service/backend",
+    "webapp": "yarn workspace @auth-service/webapp"
   },
   "repository": "https://github.com/teriyaki0/auth-service.git",
   "author": "teriyaki0 <ttemyrlan5@gmail.com>",

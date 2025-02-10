@@ -1,0 +1,28 @@
+@use "./_vars.scss" as *;
+
+@mixin link($color: $blue, $hoverColor: $pink) {
+  color: $color;
+  font-size: 16px;
+  transition: color 200ms ease;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    color: $hoverColor;
+    transition: none;
+  }
+}
+
+@mixin text {
+  font-size: 16px;
+  color: $black;
+}
+
+@mixin h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+@mixin h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
