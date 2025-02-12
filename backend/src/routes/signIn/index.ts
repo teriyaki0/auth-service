@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
-import { config } from "src/lib/config";
-import { HashUtil } from "src/utils/hash.util";
-import { JwtUtil } from "src/utils/jwt.util";
+import { config } from "../../lib/config";
+import { HashUtil } from "../../utils/hash.util";
+import { JwtUtil } from "../../utils/jwt.util";
 
 export const signIn: RequestHandler = async (req, res, next): Promise<void> => {
   try {
@@ -28,9 +28,12 @@ export const signIn: RequestHandler = async (req, res, next): Promise<void> => {
       user,
     });
 
-    await req.ctx.redis.set(refreshToken, user.id, {
-      EX: Number(config.REFRESH_EXPIRES_IN),
-    });
+    await req.ctx.redis.set(
+      refreshToken,
+      user.id,
+      "EX",
+      config.REFRESH_EXPIRES_IN
+    );
 
     res.status(200).json({
       message: "Вход выполнен успешно",

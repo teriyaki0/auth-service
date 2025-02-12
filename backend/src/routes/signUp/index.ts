@@ -28,9 +28,12 @@ export const signUp: RequestHandler = async (req, res, next): Promise<void> => {
       user,
     });
 
-    await req.ctx.redis.set(refreshToken, user.id, {
-      EX: Number(config.REFRESH_EXPIRES_IN),
-    });
+    await req.ctx.redis.set(
+      refreshToken,
+      user.id,
+      "EX",
+      config.REFRESH_EXPIRES_IN
+    );
 
     res.status(201).json({
       message: "Пользователь зарегистрирован",

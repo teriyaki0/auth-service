@@ -1,5 +1,5 @@
-import express from "express";
-import { AppContext, contextMiddleware, createAppContext } from "./lib/ctx";
+import express, { NextFunction, Request, Response } from "express";
+import { AppContext, createAppContext } from "./lib/ctx";
 import { config } from "./lib/config";
 import routes from "./routes";
 
@@ -11,7 +11,11 @@ async function main() {
     const app = express();
 
     app.use(express.json());
-    app.use(contextMiddleware);
+    app.use((req: Request, _res: Response, next: NextFunction) => {
+      req.ctx = ctx as AppContext;
+      next();
+    });
+
     app.use("/auth", routes);
 
     app.listen(config.HTTP_PORT, () => {

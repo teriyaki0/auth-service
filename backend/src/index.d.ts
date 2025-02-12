@@ -5,6 +5,7 @@ import { AppContext } from "./lib/ctx";
 declare module "express-serve-static-core" {
   interface Request {
     ctx: AppContext;
+    me?: User;
   }
 }
 

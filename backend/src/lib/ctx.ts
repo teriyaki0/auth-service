@@ -13,18 +13,4 @@ export const createAppContext = () => {
   };
 };
 
-export function contextMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  req.ctx = createAppContext();
-
-  res.on("finish", () => {
-    req.ctx.stop();
-  });
-
-  next();
-}
-
 export type AppContext = ReturnType<typeof createAppContext>;
